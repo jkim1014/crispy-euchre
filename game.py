@@ -139,7 +139,8 @@ def main():
 	# Take input from user
 	print "Welcome to Crispy Euchre!"
 	lowest_value = int(raw_input("What should be the lowest value of cards for this game?\n"))
-
+	while lowest_value < 2 or lowest_value > 10:
+		lowest_value = int(raw_input("Invalid input! Card number is too small or large! Try a new number.\n"))
 	# Make deck
 	game_deck = Deck(lowest_value - 1, 13, 0, 0)
 	for i in range(7):
@@ -174,7 +175,7 @@ def main():
 	print "You are teammates with player " + str(player_number) 
 
 	# Enter game! Finish only if the score for winning has been reached by a team
-	while my_team.round_points != 5 or other_team.round_points != 5:
+	while my_team.round_points != 10 or other_team.round_points != 10:
 
 		# Get dealt cards
 		deal(random_deals, game_deck, my_position, players_arr)

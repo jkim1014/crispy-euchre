@@ -14,7 +14,8 @@ class Player:
 	def play_one_card(self, played_arr):
 		trump = self.current_deck.current_trump
 		card_index = int(raw_input("What card would you like to play?\n"))
-
+		while card_index > len(self.hand):
+			card_index = int(raw_input("You don't have that many cards in your hand! Pick a valid card to play:\n"))
 		# If you are not the first person to play, make sure you can only play valid cards
 		if len(played_arr) > 0:
 			has = False
