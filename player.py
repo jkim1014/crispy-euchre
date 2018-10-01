@@ -1,17 +1,31 @@
-class Bot:
-	def __init__(self, hand=None):
-		self.hand = [] if cards is None else hand
+from deck import Deck
 
-	def get_my_hand(hand):
-		self.hands = hand
+class Player:
+	def __init__(self, hand=None, current_deck=Deck()):
+		self.current_deck = current_deck
+		self.hand = [] if hand is None else hand
 
-	def add(card):
+	def get_my_hand(self, hand):
+		self.hand = hand
+
+	def add(self, card):
 		self.hand.append(card)
 
-	def play_one_card(card):
-		#TODO
-		self.hand.remove(card)
+	def play_one_card(self, played_arr):
+		trump = self.current_deck.current_trump
+		card_index = int(raw_input("What card would you like to play?\n"))
 
-	def swap(my_card, foreign_card):
+		# If you are not the first person to play, make sure you can only play valid cards
+		if len(played_arr) > 0:
+			has = False
+			for card in self.hand:
+				if card.suite == played_arr[0][0].suite:
+					has = True
+			if has:
+				while self.hand[card_index - 1].suite != (played_arr[0][0].suite or trump):
+					card_index = int(raw_input("Invalid card to play! Try another card\n"))
+		return self.hand.pop(card_index - 1)
+
+	def swap(self, my_card, foreign_card):
 		self.hand.append(foreign_card)
 		self.hand.remove(my_card)

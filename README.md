@@ -1,1 +1,1 @@
-# crispy-euchre
+# Crispy Euchre
